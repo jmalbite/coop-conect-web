@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  ng-coop-connect-dev:
+    build:
+      context: .
+      dockerfile: "./docker/dev/Dockerfile.dev"
+    ports:
+      - "4200:4200"
+    volumes:
+      - ".:/app"
