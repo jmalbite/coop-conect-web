@@ -1,19 +1,24 @@
-FROM node:14.21.3-alpine
+# Use a specific version of the Node.js Alpine image
+FROM node:18.13.0-alpine
 
-ARG WORK_DIR=/app
-ENV PATH ${WORK_DIR}/node_modules/.bin:$PATH
+# Set the working directory
+WORKDIR /app
 
-RUN mkdir ${WORK_DIR}
-WORKDIR ${WORK_DIR}
+# Add the Angular CLI to the PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
-COPY package.json ${WORK_DIR}
-COPY package-lock.json ${WORK_DIR}
+# Install the specific version of Angular CLI globally
+RUN npm install -g @angular/cli
 
-RUN npm install -g @angular/cli@14.2.0
+# Copy package files and install dependencies
+COPY package*.json ./
 RUN npm install
 
-COPY . ${WORK_DIR}
+# Copy the entire application code
+COPY . .
 
+# Expose the port that the Angular app will run on
 EXPOSE 4200
 
-CMD ng serve --host 0.0.0.0
+# Define the command to run your application
+CMD ["ng", "serve", "--host", "0.0.0.0"]
