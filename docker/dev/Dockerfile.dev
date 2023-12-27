@@ -1,24 +1,6 @@
 # Use a specific version of the Node.js Alpine image
-FROM node:18.13.0-alpine
+FROM node:18.13.0-bullseye-slim
 
-# Set the working directory
 WORKDIR /app
 
-# Add the Angular CLI to the PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
-# Install the specific version of Angular CLI globally
-RUN npm install -g @angular/cli
-
-# Copy package files and install dependencies
-COPY package*.json ./
-RUN npm install
-
-# Copy the entire application code
-COPY . .
-
-# Expose the port that the Angular app will run on
-EXPOSE 4200
-
-# Define the command to run your application
-CMD ["ng", "serve", "--host", "0.0.0.0"]
+RUN npm install -g @angular/cli@15.2.10
