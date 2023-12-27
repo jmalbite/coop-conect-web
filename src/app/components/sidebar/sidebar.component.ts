@@ -15,36 +15,35 @@ export const ROUTES: RouteInfo[] = [
     class: '',
   },
   {
-    path: '/icons',
+    path: '/contributions',
     title: 'Contributions',
-    icon: 'fas fa-hand-holding-usd text-success',
+    icon: 'fas fa-money-bill-alt text-success',
     class: '',
   },
   {
-    path: '/maps',
+    path: '/loans',
+    title: 'Loans',
+    icon: 'fas fa-hand-holding-usd text-orange',
+    class: '',
+  },
+  {
+    path: '/loan-payments',
     title: 'Loan Payments',
-    icon: 'fas fa-receipt text-orange',
+    icon: 'fas fa-file-invoice-dollar text-primary',
     class: '',
   },
   {
-    path: '/user-profile',
+    path: '/members',
     title: 'Members',
     icon: 'fas fa-users text-yellow',
     class: '',
   },
   {
-    path: '/tables',
+    path: '/settings',
     title: 'Settings',
     icon: 'ni-settings-gear-65 text-red',
     class: '',
   },
-  // { path: "/login", title: "Login", icon: "ni-key-25 text-info", class: "" },
-  // {
-  //   path: "/register",
-  //   title: "Register",
-  //   icon: "ni-circle-08 text-pink",
-  //   class: "",
-  // },
 ];
 
 @Component({
