@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 declare interface RouteInfo {
   path: string;
@@ -9,34 +9,34 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   {
-    path: "/dashboard",
-    title: "Dashboard",
-    icon: "fas fa-chart-bar text-blue",
-    class: "",
+    path: '/dashboard',
+    title: 'Dashboard',
+    icon: 'fas fa-chart-bar text-blue',
+    class: '',
   },
   {
-    path: "/icons",
-    title: "Contributions",
-    icon: "fas fa-hand-holding-usd text-success",
-    class: "",
+    path: '/icons',
+    title: 'Contributions',
+    icon: 'fas fa-hand-holding-usd text-success',
+    class: '',
   },
   {
-    path: "/maps",
-    title: "Loan Payments",
-    icon: "fas fa-receipt text-orange",
-    class: "",
+    path: '/maps',
+    title: 'Loan Payments',
+    icon: 'fas fa-receipt text-orange',
+    class: '',
   },
   {
-    path: "/user-profile",
-    title: "Members",
-    icon: "fas fa-users text-yellow",
-    class: "",
+    path: '/user-profile',
+    title: 'Members',
+    icon: 'fas fa-users text-yellow',
+    class: '',
   },
   {
-    path: "/tables",
-    title: "Settings",
-    icon: "ni-settings-gear-65 text-red",
-    class: "",
+    path: '/tables',
+    title: 'Settings',
+    icon: 'ni-settings-gear-65 text-red',
+    class: '',
   },
   // { path: "/login", title: "Login", icon: "ni-key-25 text-info", class: "" },
   // {
@@ -48,9 +48,9 @@ export const ROUTES: RouteInfo[] = [
 ];
 
 @Component({
-  selector: "app-sidebar",
-  templateUrl: "./sidebar.component.html",
-  styleUrls: ["./sidebar.component.scss"],
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
   public menuItems: any[];
