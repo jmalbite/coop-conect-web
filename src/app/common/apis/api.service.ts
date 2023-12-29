@@ -23,6 +23,8 @@ export class ApiService {
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': 'http://localhost:4201',
     });
   }
 
@@ -33,7 +35,7 @@ export class ApiService {
    */
   get(endpoint: string): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.get(`${this.root}/${endpoint}`, { headers });
+    return this.http.get(`${this.root}/${endpoint}`, { headers, withCredentials: true });
   }
 
   /**
@@ -44,7 +46,7 @@ export class ApiService {
    */
   post(endpoint: string, params: any): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.post(`${this.root}/${endpoint}`, params, { headers });
+    return this.http.post(`${this.root}/${endpoint}`, params, { headers, withCredentials: true });
   }
 
   /**
@@ -55,6 +57,11 @@ export class ApiService {
    */
   patch(endpoint: string, params: any): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.patch(`${this.root}/${endpoint}`, params, { headers });
+    return this.http.patch(`${this.root}/${endpoint}`, params, { headers, withCredentials: true });
+  }
+
+  logOutPost(endpoint: string): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.post(`${this.root}/${endpoint}`, null, { withCredentials: true });
   }
 }

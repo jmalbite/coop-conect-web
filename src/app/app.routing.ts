@@ -4,16 +4,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { AuthGuard } from './common/guard/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   },
   {
     path: '',
     component: AdminLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -25,8 +28,15 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'login',
-    loadChildren: () => import('./pages/login/feature/login.module').then((m) => m.LoginModule),
+    path: '',
+    component: AuthLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('src/app/layouts/auth-layout/auth-layout.module').then((m) => m.AuthLayoutModule),
+      },
+    ],
   },
   {
     path: '**',

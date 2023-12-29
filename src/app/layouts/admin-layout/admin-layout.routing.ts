@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from 'src/app/common/guard/auth.guard';
 
 export const AdminLayoutRoutes: Routes = [
   {

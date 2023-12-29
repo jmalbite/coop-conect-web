@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/common/apis/api.service';
 
 @Injectable()
-export class LoginApiService {
+export class AuthApiService {
   constructor(private api: ApiService) {}
 
   /**
@@ -13,5 +13,9 @@ export class LoginApiService {
    */
   login(data: { username: string; password: string }): Observable<any> {
     return this.api.post('auth/login', data);
+  }
+
+  logout(): Observable<void> {
+    return this.api.logOutPost('auth/logout');
   }
 }

@@ -12,6 +12,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ApiService } from './common/apis/api.service';
 import { ComponentsModule } from './components/components.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { authReducers } from './common/store/reducers/auth.reducer';
+import { AuthEffects } from './common/store/effect/auth.effect';
+import { AuthApiService } from './pages/login/data-access/api/login-api.service';
+import { MemberApiService } from './common/apis/member-api.service';
 
 @NgModule({
   imports: [
@@ -22,9 +30,16 @@ import { ComponentsModule } from './components/components.module';
     NgbModule,
     RouterModule,
     AppRoutingModule,
+    StoreModule.forRoot({ auth: authReducers }),
+    EffectsModule.forRoot([AuthEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+    }),
   ],
   declarations: [AppComponent, AdminLayoutComponent],
-  providers: [ApiService],
+  providers: [ApiService, AuthApiService, MemberApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
