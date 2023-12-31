@@ -38,17 +38,23 @@ export class LoginComponent implements OnInit, OnDestroy {
       username: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required]),
     });
+
+    this.authErrorObserver();
   }
 
   login(): void {
+    this.loginForm.markAllAsTouched();
+
     if (this.loginForm.invalid) return;
 
     this.store.dispatch(AuthAction.loginAction(this.loginForm.value));
+  }
 
+  private authErrorObserver(): void {
     this.store
       .pipe(select(authErrorMessageSelector), takeUntil(this.unsusbcribe$))
       .subscribe({
-        next: (errorMessage) => errorMessage && this.toastr.show(errorMessage),
+        next: (errorMessage) => errorMessage && this.toastr.error(errorMessage),
       });
   }
 

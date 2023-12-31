@@ -20,6 +20,7 @@ import { AuthEffects } from './common/store/effect/auth.effect';
 import { authReducers } from './common/store/reducers/auth.reducer';
 import { ComponentsModule } from './components/components.module';
 import { AuthApiService } from './pages/login/data-access/api/login-api.service';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -30,6 +31,8 @@ import { AuthApiService } from './pages/login/data-access/api/login-api.service'
     NgbModule,
     RouterModule,
     AppRoutingModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
     StoreModule.forRoot({ auth: authReducers }),
     EffectsModule.forRoot([AuthEffects]),
     StoreDevtoolsModule.instrument({
