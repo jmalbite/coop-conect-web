@@ -1,45 +1,55 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthApiService } from '../data-access/api/login-api.service';
-import { Observable, Subject, takeUntil } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { AppStateInterface } from 'src/app/common/store/state-interfaces/app-state.interface';
-import { isLoadingSelector } from 'src/app/common/store/selectors/auth.selector';
-import * as AuthAction from '../../../common/store/actions/auth.action';
-import { isLoginSelector } from '../../../common/store/selectors/auth.selector';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
+import { Observable, Subject, takeUntil } from 'rxjs';
+import {
+  authErrorMessageSelector,
+  isLoadingSelector,
+} from 'src/app/common/store/selectors/auth.selector';
+import { AppStateInterface } from 'src/app/common/store/state-interfaces/app-state.interface';
+import * as AuthAction from '../../../common/store/actions/auth.action';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers: [AuthApiService],
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private unsusbcribe$ = new Subject<void>();
 
+  loginForm: FormGroup;
+
   isLoading$: Observable<boolean>;
+
+  test: string = '';
 
   constructor(
     private store: Store<AppStateInterface>,
     private router: Router,
+    private toastr: ToastrService,
   ) {
     this.isLoading$ = this.store.pipe(select(isLoadingSelector));
   }
 
   ngOnInit() {
-    this.checkIsLoginObserver();
+    this.loginForm = new FormGroup({
+      username: new FormControl(null, [Validators.required]),
+      password: new FormControl(null, [Validators.required]),
+    });
   }
 
   login(): void {
-    this.store.dispatch(
-      AuthAction.loginAction({ username: 'jmalbite', password: '!@jmAlbite06?' }),
-    );
-  }
+    if (this.loginForm.invalid) return;
 
-  private checkIsLoginObserver(): void {
-    this.store.pipe(select(isLoginSelector), takeUntil(this.unsusbcribe$)).subscribe({
-      next: (isLogin) => isLogin && this.router.navigate(['/dashboard']),
-    });
+    this.store.dispatch(AuthAction.loginAction(this.loginForm.value));
+
+    this.store
+      .pipe(select(authErrorMessageSelector), takeUntil(this.unsusbcribe$))
+      .subscribe({
+        next: (errorMessage) => errorMessage && this.toastr.show(errorMessage),
+      });
   }
 
   ngOnDestroy() {

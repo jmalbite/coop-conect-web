@@ -13,7 +13,7 @@ import { MapsComponent } from '../../pages/maps/maps.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { AdminLayoutRoutes } from './admin-layout.routing';
-// import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -23,6 +23,7 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
     HttpClientModule,
     NgbModule,
     ClipboardModule,
+    // ToastrModule,
   ],
   declarations: [
     DashboardComponent,

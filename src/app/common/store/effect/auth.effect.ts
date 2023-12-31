@@ -21,6 +21,7 @@ export class AuthEffects {
               map((data: MemberInterface) => {
                 storeLocal('id', data.id);
 
+                this.router.navigate(['']);
                 return AuthActions.loginSuccessAction({ data });
               }),
             );
@@ -63,9 +64,12 @@ export class AuthEffects {
       exhaustMap((action) =>
         this.member.getMemberById(action.id).pipe(
           map((data) => AuthActions.authMemberSuccessAction({ data })),
-          catchError(({ error }: HttpErrorResponse) =>
-            of(AuthActions.authMemberFailAction({ error: error?.error, message: error?.message })),
-          ),
+          catchError(({ error }: HttpErrorResponse) => {
+            removeFromLocal('id');
+            return of(
+              AuthActions.authMemberFailAction({ error: error?.error, message: error?.message }),
+            );
+          }),
         ),
       ),
     ),

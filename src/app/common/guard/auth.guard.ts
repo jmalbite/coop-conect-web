@@ -7,16 +7,11 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { Observable, Subject, take, takeUntil, tap } from 'rxjs';
-import {
-  isLoginSelector,
-  memberIdSelector,
-  memberSelector,
-} from '../store/selectors/auth.selector';
+import { Observable, Subject, map, takeUntil } from 'rxjs';
+import * as AuthActions from '../store/actions/auth.action';
+import { isLoginSelector, memberIdSelector } from '../store/selectors/auth.selector';
 import { AppStateInterface } from '../store/state-interfaces/app-state.interface';
 import { getItemFromLocal } from '../utils';
-import * as AuthActions from '../store/actions/auth.action';
-import { MemberInterface } from '../interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate, OnDestroy {
@@ -31,15 +26,20 @@ export class AuthGuard implements CanActivate, OnDestroy {
     this.setMemberId();
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+  ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     this.memberId && this.store.dispatch(AuthActions.authMemberAction({ id: this.memberId }));
 
     return this.store.pipe(
       select(isLoginSelector),
-      tap((loggedIn) => {
-        if (loggedIn) return;
-
-        this.router.navigate(['/login']);
+      map((isLogin) => {
+        if (isLogin || this.memberId) {
+          return state.url === '/login' ? this.router.createUrlTree(['']) : true;
+        } else {
+          return state.url === '/login' ? true : this.router.createUrlTree(['/login']);
+        }
       }),
     );
   }
@@ -53,7 +53,6 @@ export class AuthGuard implements CanActivate, OnDestroy {
 
     memberId$.pipe(takeUntil(this.unsubscribe$)).subscribe({
       next: (id: string | null) => {
-        console.log(id, '😍');
         id ? (this.memberId = id) : (this.memberId = getItemFromLocal('id'));
       },
     });

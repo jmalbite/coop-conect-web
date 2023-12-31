@@ -9,17 +9,17 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { AppRoutingModule } from './app.routing';
-import { ApiService } from './common/apis/api.service';
-import { ComponentsModule } from './components/components.module';
-import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { authReducers } from './common/store/reducers/auth.reducer';
-import { AuthEffects } from './common/store/effect/auth.effect';
-import { AuthApiService } from './pages/login/data-access/api/login-api.service';
+import { AppRoutingModule } from './app.routing';
+import { ApiService } from './common/apis/api.service';
 import { MemberApiService } from './common/apis/member-api.service';
+import { AuthEffects } from './common/store/effect/auth.effect';
+import { authReducers } from './common/store/reducers/auth.reducer';
+import { ComponentsModule } from './components/components.module';
+import { AuthApiService } from './pages/login/data-access/api/login-api.service';
 
 @NgModule({
   imports: [
