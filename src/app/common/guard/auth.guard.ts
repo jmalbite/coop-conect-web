@@ -8,8 +8,11 @@ import {
 } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject, map, takeUntil } from 'rxjs';
-import * as AuthActions from '../store/actions/auth.action';
-import { isLoginSelector, memberIdSelector } from '../store/selectors/auth.selector';
+import * as AuthActions from '../store/actions/auth.actions';
+import {
+  isLoginSelector,
+  memberIdSelector,
+} from '../store/selectors/auth.selectors';
 import { AppStateInterface } from '../store/state-interfaces/app-state.interface';
 import { getItemFromLocal } from '../utils';
 
@@ -29,16 +32,25 @@ export class AuthGuard implements CanActivate, OnDestroy {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
-  ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    this.memberId && this.store.dispatch(AuthActions.authMemberAction({ id: this.memberId }));
+  ):
+    | boolean
+    | UrlTree
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree> {
+    this.memberId &&
+      this.store.dispatch(AuthActions.authMemberAction({ id: this.memberId }));
 
     return this.store.pipe(
       select(isLoginSelector),
       map((isLogin) => {
         if (isLogin || this.memberId) {
-          return state.url === '/login' ? this.router.createUrlTree(['']) : true;
+          return state.url === '/login'
+            ? this.router.createUrlTree([''])
+            : true;
         } else {
-          return state.url === '/login' ? true : this.router.createUrlTree(['/login']);
+          return state.url === '/login'
+            ? true
+            : this.router.createUrlTree(['/login']);
         }
       }),
     );

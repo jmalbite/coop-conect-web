@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import * as AuthActions from '../actions/auth.action';
+import * as AuthActions from '../actions/auth.actions';
 import { AuthStateInterface } from '../state-interfaces/auth-state.interface';
 
 export const intitalState: AuthStateInterface = {

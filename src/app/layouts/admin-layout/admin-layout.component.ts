@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
-import { isLoginSelector } from 'src/app/common/store/selectors/auth.selector';
+import { isLoginSelector } from 'src/app/common/store/selectors/auth.selectors';
 import { AppStateInterface } from 'src/app/common/store/state-interfaces/app-state.interface';
 import { getItemFromLocal } from 'src/app/common/utils';
 

@@ -1,5 +1,7 @@
 {
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "vsicons.presets.foldersAllDefaultIcon": true,
+  "material-icon-theme.activeIconPack": "angular_ngrx"
 }

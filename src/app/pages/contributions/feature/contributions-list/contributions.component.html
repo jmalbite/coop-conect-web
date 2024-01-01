@@ -1,7 +1,196 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
+      <div class="row">
+        <div class="col">
+          <button
+            (click)="addContribution()"
+            class="btn btn-icon btn-2 btn-primary"
+            type="button">
+            <span class="btn-inner--icon mr-2">
+              <i class="fas fa-plus-circle"></i>
+            </span>
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="filter-forms">
+        <div class="form-group">
+          <div class="input-group input-group-alternative mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="ni ni-zoom-split-in"></i>
+              </span>
+            </div>
+            <input
+              class="form-control form-control-alternative"
+              placeholder="Search by name"
+              type="text" />
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div class="col">
+      <div class="filter-forms">
+        <div class="form-group">
+          <div class="input-group input-group-alternative mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="ni ni-badge"></i>
+              </span>
+            </div>
+            <input
+              class="form-control form-control-alternative"
+              placeholder="Transaction number"
+              type="text" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="filter-forms">
+        <div class="form-group">
+          <select
+            class="form-control form-control-alternative"
+            placeholder="Paid through">
+            <option class="text-muted">- None -</option>
+            <option>Cash</option>
+            <option>Online</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="filter-forms">
+        <div class="form-group">
+          <div class="input-group input-group-alternative">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="ni ni-calendar-grid-58"> </i>
+              </span>
+            </div>
+            <input
+              type="text"
+              placeholder="Date range"
+              class="form-control"
+              bsDaterangepicker
+              [bsValue]="defaultRange"
+              [bsConfig]="{
+                isAnimated: true,
+                containerClass: 'theme-blue'
+              }" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <button class="btn btn-icon btn-3 btn-primary" type="button">
+        <span class="btn-inner--icon">
+          <i class="fas fa-search"></i>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- contributions data -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow bg-gradient-default">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table align-items-center table-dark table-flush">
+              <thead class="thead-dark">
+                <tr>
+                  <th class="text-white">Member</th>
+                  <th class="text-white">Amount</th>
+                  <th class="text-white">Date</th>
+                  <th class="text-white">Paid through</th>
+                  <th class="text-white">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Jam Albite</td>
+                  <td>4000</td>
+                  <td>
+                    Jan 4, 2024
+                    <span class="ml-1 badge badge-pill badge-danger text-white">
+                      Void
+                    </span>
+                  </td>
+                  <td>
+                    <span class="badge badge-dot">
+                      <i class="bg-success"></i> Cash
+                    </span>
+                  </td>
+                  <td>
+                    <div ngbDropdown placement="bottom-down">
+                      <a
+                        class="btn btn-sm btn-icon-only text-light"
+                        ngbDropdownToggle>
+                        <i class="fas fa-bars"></i>
+                      </a>
+                      <div
+                        ngbDropdownMenu
+                        class="dropdown-menu-right dropdown-menu-arrow">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#"
+                          >Something else here</a
+                        >
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Jam Albite</td>
+                  <td>4000</td>
+                  <td>Jan 5, 2024</td>
+                  <td>
+                    <span class="badge badge-dot">
+                      <i class="bg-info"></i> Online
+                    </span>
+                  </td>
+                  <td>
+                    <button class="btn btn-primary btn-sm">
+                      <span class="btn-inner--icon">
+                        <i class="fas fa-bars"></i>
+                      </span>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Jam Albite</td>
+                  <td>4000</td>
+                  <td>Jan 5, 2024</td>
+                  <td>
+                    <span class="badge badge-dot">
+                      <i class="bg-success"></i> Cash
+                    </span>
+                  </td>
+                  <td>
+                    <button class="btn btn-primary btn-sm">
+                      <span class="btn-inner--icon">
+                        <i class="fas fa-bars"></i>
+                      </span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

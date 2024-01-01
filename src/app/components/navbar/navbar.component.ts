@@ -4,8 +4,8 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Store, select } from '@ngrx/store';
 import { AppStateInterface } from 'src/app/common/store/state-interfaces/app-state.interface';
 import { Observable } from 'rxjs';
-import { isLoadingSelector } from 'src/app/common/store/selectors/auth.selector';
-import { logoutAction } from 'src/app/common/store/actions/auth.action';
+import { isLoadingSelector } from 'src/app/common/store/selectors/auth.selectors';
+import { logoutAction } from 'src/app/common/store/actions/auth.actions';
 
 @Component({
   selector: 'app-navbar',

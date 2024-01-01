@@ -12,15 +12,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ToastrModule } from 'ngx-toastr';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app.routing';
 import { ApiService } from './common/apis/api.service';
 import { MemberApiService } from './common/apis/member-api.service';
-import { AuthEffects } from './common/store/effect/auth.effect';
+import { AuthEffects } from './common/store/effects/auth.effects';
 import { authReducers } from './common/store/reducers/auth.reducer';
 import { ComponentsModule } from './components/components.module';
 import { AuthApiService } from './pages/login/data-access/api/login-api.service';
-import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -31,8 +31,8 @@ import { ToastrModule } from 'ngx-toastr';
     NgbModule,
     RouterModule,
     AppRoutingModule,
-    ToastrModule.forRoot(),
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     StoreModule.forRoot({ auth: authReducers }),
     EffectsModule.forRoot([AuthEffects]),
     StoreDevtoolsModule.instrument({

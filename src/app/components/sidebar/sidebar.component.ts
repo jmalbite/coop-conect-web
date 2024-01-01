@@ -6,6 +6,7 @@ declare interface RouteInfo {
   title: string;
   icon: string;
   class: string;
+  includeInMenu: boolean;
 }
 export const ROUTES: RouteInfo[] = [
   {
@@ -13,36 +14,49 @@ export const ROUTES: RouteInfo[] = [
     title: 'Dashboard',
     icon: 'fas fa-chart-bar text-blue',
     class: '',
+    includeInMenu: true,
   },
   {
     path: '/contributions',
     title: 'Contributions',
     icon: 'fas fa-money-bill-alt text-success',
     class: '',
+    includeInMenu: true,
+  },
+  {
+    path: '/contributions/add',
+    title: 'Add Contribution',
+    icon: 'fas fa-money-bill-alt text-success',
+    class: '',
+    includeInMenu: false,
   },
   {
     path: '/loans',
     title: 'Loans',
     icon: 'fas fa-hand-holding-usd text-orange',
     class: '',
+    includeInMenu: true,
   },
   {
     path: '/loan-payments',
     title: 'Loan Payments',
     icon: 'fas fa-file-invoice-dollar text-primary',
     class: '',
+    includeInMenu: true,
   },
   {
     path: '/members',
     title: 'Members',
     icon: 'fas fa-users text-yellow',
     class: '',
+    includeInMenu: true,
   },
   {
     path: '/settings',
     title: 'Settings',
     icon: 'ni-settings-gear-65 text-red',
     class: '',
+    includeInMenu: true,
   },
 ];
 

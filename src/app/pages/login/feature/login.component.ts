@@ -7,9 +7,9 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 import {
   authErrorMessageSelector,
   isLoadingSelector,
-} from 'src/app/common/store/selectors/auth.selector';
+} from 'src/app/common/store/selectors/auth.selectors';
 import { AppStateInterface } from 'src/app/common/store/state-interfaces/app-state.interface';
-import * as AuthAction from '../../../common/store/actions/auth.action';
+import * as AuthAction from '../../../common/store/actions/auth.actions';
 
 @Component({
   selector: 'app-login',

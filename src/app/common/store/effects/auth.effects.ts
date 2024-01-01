@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of, switchMap } from 'rxjs';
 import { AuthApiService } from 'src/app/pages/login/data-access/api/login-api.service';
 import { AuthInterface, MemberInterface } from '../../interfaces';
-import * as AuthActions from '../actions/auth.action';
+import * as AuthActions from '../actions/auth.actions';
 import { MemberApiService } from '../../apis/member-api.service';
 import { removeFromLocal, storeLocal } from '../../utils';
 import { Router } from '@angular/router';
@@ -15,27 +15,29 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.loginAction),
       exhaustMap((action) =>
-        this.auth.login({ username: action.username, password: action.password }).pipe(
-          switchMap((result: AuthInterface) => {
-            return this.member.getMemberById(result.id).pipe(
-              map((data: MemberInterface) => {
-                storeLocal('id', data.id);
+        this.auth
+          .login({ username: action.username, password: action.password })
+          .pipe(
+            switchMap((result: AuthInterface) => {
+              return this.member.getMemberById(result.id).pipe(
+                map((data: MemberInterface) => {
+                  storeLocal('id', data.id);
 
-                this.router.navigate(['']);
-                return AuthActions.loginSuccessAction({ data });
-              }),
-            );
-          }),
-          catchError(({ error }: HttpErrorResponse) =>
-            of(
-              AuthActions.loginFailAction({
-                error: error?.error,
-                message: error?.message,
-                statusCode: error?.statusCode,
-              }),
+                  this.router.navigate(['']);
+                  return AuthActions.loginSuccessAction({ data });
+                }),
+              );
+            }),
+            catchError(({ error }: HttpErrorResponse) =>
+              of(
+                AuthActions.loginFailAction({
+                  error: error?.error,
+                  message: error?.message,
+                  statusCode: error?.statusCode,
+                }),
+              ),
             ),
           ),
-        ),
       ),
     ),
   );
@@ -51,7 +53,12 @@ export class AuthEffects {
             return AuthActions.logoutSuccessAction();
           }),
           catchError(({ error }: HttpErrorResponse) =>
-            of(AuthActions.logoutFailAction({ error: error?.error, message: error?.message })),
+            of(
+              AuthActions.logoutFailAction({
+                error: error?.error,
+                message: error?.message,
+              }),
+            ),
           ),
         ),
       ),
@@ -67,7 +74,10 @@ export class AuthEffects {
           catchError(({ error }: HttpErrorResponse) => {
             removeFromLocal('id');
             return of(
-              AuthActions.authMemberFailAction({ error: error?.error, message: error?.message }),
+              AuthActions.authMemberFailAction({
+                error: error?.error,
+                message: error?.message,
+              }),
             );
           }),
         ),

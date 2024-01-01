@@ -5,7 +5,16 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('../contributions-list/contributions.module').then((m) => m.ContributionsModule),
+      import('../contributions-list/contributions.module').then(
+        (m) => m.ContributionsModule,
+      ),
+  },
+  {
+    path: 'add',
+    loadChildren: () =>
+      import('../contribution-add/contribution-add.module').then(
+        (m) => m.ContributionAddModule,
+      ),
   },
 
   {
