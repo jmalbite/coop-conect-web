@@ -1,0 +1,19 @@
+<div class="filter-forms">
+  <div class="form-group">
+    <div class="input-group input-group-alternative mb-4">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="ni ni-zoom-split-in"></i>
+        </span>
+      </div>
+      <input
+        class="form-control form-control-alternative"
+        placeholder="Search by name"
+        [value]="value"
+        [disabled]="isDisabled"
+        [type]="inputType"
+        (input)="onChange($event)"
+        (blur)="(touched)" />
+    </div>
+  </div>
+</div>

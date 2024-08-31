@@ -12,9 +12,12 @@ export const intitalState: AuthStateInterface = {
 
 export const authReducers = createReducer(
   intitalState,
-  on(AuthActions.loginAction, (state) => ({ ...state, isLoading: true })),
+  on(AuthActions.loginAction, (state: AuthStateInterface) => ({
+    ...state,
+    isLoading: true,
+  })),
 
-  on(AuthActions.loginSuccessAction, (state, action) => ({
+  on(AuthActions.loginSuccessAction, (state: AuthStateInterface, action) => ({
     ...state,
     isLoading: false,
     isLogin: true,
@@ -22,7 +25,7 @@ export const authReducers = createReducer(
     member: action.data,
   })),
 
-  on(AuthActions.loginFailAction, (state, action) => ({
+  on(AuthActions.loginFailAction, (state: AuthStateInterface, action) => ({
     ...state,
     isLoading: false,
     isLogin: false,
@@ -31,7 +34,10 @@ export const authReducers = createReducer(
     statusCode: action.statusCode,
   })),
 
-  on(AuthActions.logoutAction, (state) => ({ ...state, isLoading: true })),
+  on(AuthActions.logoutAction, (state: AuthStateInterface) => ({
+    ...state,
+    isLoading: true,
+  })),
 
   on(AuthActions.logoutSuccessAction, (state) => ({
     ...state,
@@ -40,7 +46,7 @@ export const authReducers = createReducer(
     member: null,
   })),
 
-  on(AuthActions.logoutFailAction, (state, action) => ({
+  on(AuthActions.logoutFailAction, (state: AuthStateInterface, action) => ({
     ...state,
     isLoading: false,
     isLogin: true,
@@ -49,21 +55,24 @@ export const authReducers = createReducer(
   })),
 
   //auth guard
-  on(AuthActions.authMemberAction, (state) => ({
+  on(AuthActions.authMemberAction, (state: AuthStateInterface) => ({
     ...state,
     isLoading: true,
   })),
 
-  on(AuthActions.authMemberSuccessAction, (state, action) => ({
-    ...state,
-    member: action.data,
-    isLoading: false,
-    isLogin: true,
-    error: null,
-    message: null,
-  })),
+  on(
+    AuthActions.authMemberSuccessAction,
+    (state: AuthStateInterface, action) => ({
+      ...state,
+      member: action.data,
+      isLoading: false,
+      isLogin: true,
+      error: null,
+      message: null,
+    }),
+  ),
 
-  on(AuthActions.authMemberFailAction, (state, action) => ({
+  on(AuthActions.authMemberFailAction, (state: AuthStateInterface, action) => ({
     ...state,
     member: null,
     isLoading: false,
